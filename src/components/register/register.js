@@ -1,8 +1,13 @@
 import { React, useState } from 'react'
 import "./register.css"
 import axios from "axios"
+import { useNavigate } from 'react-router-dom';
+
 
 const Register = () => {
+
+    const navigate = useNavigate();
+
     // State to store user input data
     const [user, setUser] = useState({
         name: "",
@@ -33,7 +38,7 @@ const Register = () => {
                     // Show the response message from the server after successful registration
                     alert(res.data.message);
                     // Optionally, redirect the user to the login page after successful registration
-                    // history.push("/login");
+                    navigate("/")
                 })
                 .catch(error => {
                     // Handle errors, if any, during the registration process
@@ -48,10 +53,10 @@ const Register = () => {
 
     return (
         <div className="register">
-            {/* For debugging purposes: Display the current state */}
+        
             {console.log(user)}
             <h1>Register</h1>
-            {/* Input fields for name, email, password, and re-enter password */}
+        
             <input type="text" name="name" value={user.name} onChange={handleChange} placeholder="Your Name" />
             <input type="text" name="email" value={user.email} onChange={handleChange} placeholder="Your Email" />
             <input type="password" name="password" value={user.password} onChange={handleChange} placeholder="Your Password" />
@@ -59,8 +64,7 @@ const Register = () => {
             {/* Register button triggers the register function when clicked */}
             <div className="button" onClick={register}>Register</div>
             <div>or</div>
-            {/* Placeholder for login functionality */}
-            <div className="button" >Login</div>
+            <div className="button" onClick={() => navigate("/login")}>Login</div>
         </div>
     )
 }

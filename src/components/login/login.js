@@ -1,8 +1,14 @@
 import { React, useState } from 'react'
 import "./login.css"
 import axios from "axios"
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
+    const navigate = useNavigate();
+
+
+
     const [user, setUser] = useState({
 
         email: "",
@@ -24,6 +30,7 @@ const Login = () => {
             alert(res.data.message)
             // setLoginUser(res.data.user)
             // history.push("/")
+            navigate("/")
         })
     }
 
@@ -35,7 +42,7 @@ const Login = () => {
             <input type="password" name="password" value={user.password} placeholder="Enter your Password" onChange={ handleChange }></input>
             <div className="button" onClick={login}>Login</div>
             <div>or</div>
-            <div className="button">Register</div>
+            <div className="button" onClick={() => navigate("/register")}>Register</div>
         </div>
     )
 }
